@@ -23,7 +23,7 @@ public class Permutation {
         for(int i=index;i<arr.length;i++){
             swap(arr,index,i);
             permu(arr,index+1);
-            swap(arr,index,i);
+            swap(arr,index,i);//backtracking
         }
     }
     public static void swap(int[] arr,int i,int j){
