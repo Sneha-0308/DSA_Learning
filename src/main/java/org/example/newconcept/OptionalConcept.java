@@ -1,5 +1,8 @@
 package org.example.newconcept;
 
+import org.example.newconcept.model.UserDetails;
+
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -100,9 +103,43 @@ public class OptionalConcept {
 
             System.out.println(name9.isEmpty());//false for null and true for empty string or any other string
 
+            //TODO:chaining mechanism
+            System.out.println(">..."+validateAndTransformInput("asneha").get());
+
+
+
+            //TODO:map method in optinal: public <U> Optional<U> map(Function<? super T, ? extends U> mapper)
+            Optional<String> opt3=Optional.of("sneha");
+            Optional<Integer> opt3Length=opt3.map(String::length);
+            opt3Length.ifPresent(System.out::println);
+
+            //TODO:different operation in map
+            Optional<String> opt4=Optional.of("      testing ");
+            Optional<String> ans4=opt4.map(String::trim)
+                    .map(String::toUpperCase);
+            ans4.ifPresent(System.out::println);
+
+
+
+            //TODO practical example
+            System.out.println("practical example");
+            UserDetails userDetails=new UserDetails("test","1234567890","testing");
+            Optional<UserDetails> userDetailsOpt=Optional.ofNullable(userDetails);
+            Optional<String> userName=userDetailsOpt.map(UserDetails::getName);
+            userName.ifPresent(System.out::println);
+
+
+            System.out.println("Array data handling");
+            Optional<String> opt5=Optional.ofNullable("test1,test2,test3");
+            //s is holding whole string can't do String::split its wrong
+            Optional<String[]> ans5=opt5.map(s->s.split(","));
+            ans5.ifPresent(data-> Arrays.stream(data).forEach(System.out::println));
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
     public static Optional<String> findUserById(int id){
@@ -112,5 +149,12 @@ public class OptionalConcept {
         else {
             return Optional.empty();
         }
+    }
+    private static Optional<String> validateAndTransformInput(String input) {
+        return Optional.ofNullable(input)
+                .filter(value -> !value.isBlank()) // Check if input is not blank
+                .filter(value -> value.length() > 3) // Check if input length is greater than 3
+                .map(String::toUpperCase) // Transform valid input to upper case
+                .filter(value -> value.startsWith("A")); // Additional validation
     }
 }
