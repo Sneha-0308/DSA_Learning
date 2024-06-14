@@ -1,0 +1,11 @@
+A daemon thread in Java is a type of thread that runs in the background and is typically used for tasks such as garbage collection, background monitoring, or performing periodic cleanup tasks. The key characteristic of a daemon thread is that it does not prevent the JVM (Java Virtual Machine) from exiting when all user (non-daemon) threads have finished executing. In other words, the JVM will terminate all daemon threads automatically when no user threads are running.
+
+Characteristics of Daemon Threads
+
+Background Services: Daemon threads are typically used for background services that do not require user intervention and should run as long as the application is running.
+
+Lifecycle: The lifecycle of a daemon thread is tied to the lifecycle of the JVM. If all user threads finish execution, the JVM will exit even if daemon threads are still running.
+
+Priority: Daemon threads are usually given lower priority compared to user threads.
+
+Inheritance: A thread created from a daemon thread is also a daemon thread.
