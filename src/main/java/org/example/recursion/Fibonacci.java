@@ -20,4 +20,6 @@ public class Fibonacci {
         int temp2=fib(n-2);
         return temp1+temp2;
     }
+
+    //time complexity is O(2^n)-->because we are calling function 2 times everytime
 }
