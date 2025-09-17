@@ -17,4 +17,11 @@ public class Job extends Thread{
         }
         System.out.println("\nTask "+number+" done");
     }
+
+    public static void main(String[] args) {
+        Job job=new Job(1);
+        job.start();
+    }
 }
+
+

@@ -1,0 +1,102 @@
+```
+This class demonstrates the first way to create threads by extending the `Thread` class:
+- Extends `Thread` and overrides the `run()` method
+- Takes a number parameter to identify different tasks
+- Prints numbers in a specific range (number*100 to number*100+99)
+- Shows basic thread execution with task identification
+
+### 2. **ThreadingInDS.java** - Synchronization Concepts
+```1:86:ThreadingInDS.java
+```
+This file demonstrates two important threading concepts:
+
+**Commented Section (Race Condition Example):**
+- Shows what happens without synchronization
+- Two threads increment a counter 20,000 times each
+- Expected result: 40,000, but gets less due to race conditions
+- Demonstrates the problem of concurrent access without proper synchronization
+
+**Active Section (With Synchronization):**
+- Uses `synchronized` keyword on the `increment()` method
+- Prevents race conditions by ensuring only one thread can access the method at a time
+- Guarantees the correct final count of 40,000
+
+### 3. **ThreadJoin.java** - Thread Coordination
+```1:37:ThreadJoin.java
+```
+Demonstrates thread coordination using the `join()` method:
+- Creates two `WorkThread` instances that sleep for 2 seconds
+- Uses `join()` to make the main thread wait for worker threads to complete
+- Shows how to ensure all threads finish before proceeding
+- Important for thread synchronization and coordination
+
+### 4. **CallableTask.java** - Callable Interface
+```1:22:CallableTask.java
+```
+Implements the `Callable<String>` interface:
+- Unlike `Runnable`, `Callable` can return values and throw exceptions
+- Returns a greeting message after sleeping for 1 second
+- Demonstrates the advantage of `Callable` over basic `Thread` class
+
+### 5. **CallableRunner.java** - Single Callable Execution
+```1:19:CallableRunner.java
+```
+Shows how to execute a single `Callable` task:
+- Uses `ExecutorService` with a fixed thread pool of 2 threads
+- Submits a `CallableTask` and gets a `Future<String>` result
+- Demonstrates how to retrieve the return value from a callable task
+
+### 6. **MultipleCallableRunner.java** - Multiple Callable Execution
+```1:28:MultipleCallableRunner.java
+```
+Demonstrates executing multiple callable tasks:
+- Uses `invokeAll()` to execute all tasks and wait for all to complete
+- Returns a list of `Future<String>` objects
+- Processes all results using forEach loop
+- Shows how to handle multiple concurrent tasks with return values
+
+### 7. **MultipleCallbleAnyRunner.java** - Fastest Task Execution
+```1:27:MultipleCallbleAnyRunner.java
+```
+Uses `invokeAny()` method:
+- Executes multiple tasks but returns the result of the fastest completed task
+- Important note: Thread pool size should match the number of tasks
+- Useful when you only need the first available result
+
+### 8. **ExecutorServiceRunnerForSingle.java** - Single Thread Executor
+```1:24:ExecutorServiceRunnerForSingle.java
+```
+Demonstrates `newSingleThreadExecutor()`:
+- Creates an executor with only one thread
+- Tasks execute sequentially, not concurrently
+- Shows how to execute both `Job` objects and `Thread` objects
+- Useful when you need sequential execution
+
+### 9. **ExecutorServiceRunnerForMulti.java** - Multi-Thread Executor
+```1:16:ExecutorServiceRunnerForMulti.java
+```
+Uses `newFixedThreadPool(2)`:
+- Creates a thread pool with exactly 2 threads
+- Multiple tasks can run concurrently (up to 2 at a time)
+- Shows efficient thread management for multiple tasks
+
+### 10. **ConcurrentHashMapExample.java** - Thread-Safe Collections
+```1:46:ConcurrentHashMapExample.java
+```
+Demonstrates thread-safe collections:
+- Uses `ConcurrentHashMap` for thread-safe map operations
+- Three concurrent tasks: adding, updating, and computing values
+- Shows how concurrent collections handle multiple threads safely
+- Demonstrates `computeIfPresent()` and `computeIfAbsent()` methods
+
+## Key Threading Concepts Covered:
+
+1. **Thread Creation**: Extending Thread vs implementing Runnable
+2. **Synchronization**: Using `synchronized` keyword to prevent race conditions
+3. **Thread Coordination**: Using `join()` for thread synchronization
+4. **Callable Interface**: Returning values from threads and exception handling
+5. **ExecutorService**: Thread pool management and task execution
+6. **Concurrent Collections**: Thread-safe data structures
+7. **Task Execution Patterns**: Single, multiple, and fastest task execution
+
+This collection provides a solid foundation for understanding Java threading concepts, from basic thread creation to advanced concurrent programming patterns.
